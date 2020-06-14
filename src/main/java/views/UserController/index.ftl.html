@@ -1,0 +1,26 @@
+<#import "../layout/defaultLayout.ftl.html" as layout>
+<@layout.myLayout "${i18n('app.name')} ${i18n('user.list')}">
+	<#if userList??>
+	<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">${i18n('user.list')}</div>
+	  <!-- Table -->
+	  <table class="table">
+	  	<thead>
+	  		<tr><th>${i18n('name')}</th></tr>
+	  	</thead>
+	  		<tbody>
+				<#list userList as user>
+			  		<tr>
+						<td><a href="/user/edit/${user.id}">${user.name}</a></td>
+						
+			  		</tr>
+				</#list> 
+		  	</tbody>
+			
+	  </table>
+	</div>
+	<#else>
+		not found	
+	</#if>
+</@layout.myLayout>

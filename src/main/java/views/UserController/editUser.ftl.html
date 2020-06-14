@@ -1,0 +1,38 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> 
+<@layout.myLayout "${i18n('app.name')} ${i18n('user.edit')}"> 
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h2>${i18n("user.edit")}</h2>
+		<#if user??>
+		<form id="userForm" class="form-group form-error-label" action="/user/update" method="post">
+			<@authenticityForm/>
+			<div class="contact-form">
+				<label>${i18n("name")}</label><span class="required">*</span><h5 class="contact-us-form-error">${(flash.invalidName!)}</h5>
+				<input class="form-control" type="text" id="name" name="name" value="<#if flash.name??>${(flash.name!)}<#else><#if user??>${(user.name!)}</#if></#if>" 
+				required="required" placeholder="Minimum 3 characters" />
+			</div>
+			<div class="contact-form">
+				<label>${i18n("email")}</label><span class="required">*</span><h5 class="contact-us-form-error">${(flash.invalidEmail!)}</h5>
+				<input class="form-control" type="email" name="email" value="<#if flash.email??>${(flash.email!)}<#else><#if user??>${(user.email!)}</#if></#if>" 
+				placeholder="${i18n('email')}" 	required="required"/>
+			</div>
+			<div class="contact-form">
+				<button id="submitForm" class="btn btn-success form-control">${i18n("button.update")}</button>
+			</div>
+		</form>
+		<form id="deleteUser" class="form-group form-error-label" action="/user/delete" method="post">
+			<@authenticityForm/>
+			<div class="contact-form">
+				<button id="deleteUser" class="btn btn-danger form-control">${i18n("button.delete")}</button>
+			</div>
+		</form>
+		<#else>
+			<div class="alert alert-error">
+                ${i18n('invalid.user')}
+            </div>
+		</#if>
+		<a href="/user">${i18n('user.list')}</a>
+	</div>
+</div>
+
+</@layout.myLayout>
